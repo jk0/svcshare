@@ -422,7 +422,9 @@ class NetworkMessageReactor(network.Network.Notifiee):
                                  'svcshare version %s' % _version_string)
 
   def _msgNick(self, _name, _target, ext):
-    self._notifier.nickIs(ext.split(' ', 1)[0])
+    old_nick = self._notifier.nick()
+    new_nick = ext.split(' ', 1)[0]
+    self._notifier.nickIs(old_nick, new_nick)
 
 
 class Bot(irclib.SimpleIRCClient):

@@ -109,9 +109,11 @@ class Network(object):
     if self._bot and self._status == STATUS['synced']:
       self._bot.connection.privmsg(target, message)
 
-  def nickIs(self, new_nick):
+  def nickIs(self, old_nick, new_nick):
     if self._bot and self._status == STATUS['synced']:
       self._bot.connection.nick(new_nick)
+      self.leaveEventNew(old_nick)
+      self.joinEventNew(new_nick)
 
 
 class Bot(irclib.SimpleIRCClient):
